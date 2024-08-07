@@ -1,0 +1,82 @@
+<form class="filter-form mt-6">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label class="label">اسم الشركة</mat-label>
+          <mat-select (selectionChange)="applyRequestTypeFilter($event.value)" style="width: 100%; color: #ee0659;">
+            <mat-option *ngFor="let type of requestTypes" [value]="type.value">{{ type.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label class="label">تاريخ البداية</mat-label>
+          <input matInput placeholder="اختر تاريخ" type="date" (change)="onStartDateFilterChange($event)" [(ngModel)]="addedDateFilter" name="startDate" style="width: 100%; color: #ee0659;">
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-4 d-flex align-items-center">
+        <mat-form-field appearance="outline" class="flex-grow-1">
+          <mat-label class="label">تاريخ النهاية</mat-label>
+          <input matInput placeholder="اختر تاريخ" type="date" (change)="onEndDateFilterChange($event)" [(ngModel)]="addedSecondDate" name="endDate" style="width: 100%; color: #ee0659;">
+        </mat-form-field>
+        <button mat-raised-button (click)="applyFilters()" color="primary" class="search-button ml-2">Search</button>
+      </div>
+    </div>
+  
+
+    <div class="row">
+
+        <div class="col-md-4">
+          <div class="diagram-container d-flex align-items-center">
+            <mat-icon>bar_chart</mat-icon>
+            <span class="ml-2">Show Diagram</span>
+            <button mat-button (click)="openTotalAcceptedDialog()" class="ml-2">
+              عدد الطلبات المقبولة
+            </button>
+          </div>
+        </div>
+    
+      <div class="col-2"></div>
+      <div class="col-md-4">
+        <div class="diagram-container d-flex align-items-center">
+          <mat-icon>bar_chart</mat-icon>
+          <span class="ml-2">Show Diagram</span>
+          <button mat-button (click)="openAcceptedPercentageDialog()" class="ml-2">
+            نسبة المقبول
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf=" !addedDateFilter || !addedSecondDate" class="alert alert-warning mt-3 d-flex align-items-center">
+        <mat-icon>warning</mat-icon>
+        <span class="text"> يرجى اختيار  تاريخ البداية والنهاية لكي يتم اظهار التقييم للشركات </span>
+      </div>
+      
+      <div *ngIf=" addedDateFilter && addedSecondDate" class="alert alert-success mt-3 d-flex align-items-center">
+        <mat-icon>check_circle</mat-icon>
+        <span class="text">تم اختيار كل القيم المطلوبة</span>
+      </div>
+  </form>
+    <table>
+        <thead>
+          <tr>
+            <th>العدد</th>
+            <th>اسم الشركة</th>
+            <th>اجمالي عدد الطلبات</th>
+            <th>اجمالي عدد الطلبات المقبولة</th>
+            <th>نسبة المقبول</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of companies; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.companyName }}</td>
+            <td>{{ item.totalNumber }}</td>
+            <td>{{ item.totalAcceptedNumber }}</td>
+            <td class="percentage accepted">{{ item.acceptedPercentage }}%</td>
+          </tr>
+        </tbody>
+      </table>
+

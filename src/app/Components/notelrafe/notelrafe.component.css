@@ -1,0 +1,172 @@
+/* company-list.component.css */
+
+
+.navbar {
+  background-color: #203647;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* إضافة مسافة بين شريط التنقل و الفورم */
+.form-container {
+  margin-top: 20px; /* أو أي قيمة تريدها */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: ltr;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #203647;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+tbody tr {
+  border-bottom: 2px solid #ddd;
+}
+
+tbody tr:last-child {
+  border-bottom: 0;
+}
+
+td {
+  font-size: 16px;
+}
+
+td:nth-child(4),
+td:nth-child(5) {
+  text-align: center;
+}
+
+.percentage.accepted {
+  color: green;
+}
+
+
+.refused {
+  color: #e74c3c;
+}
+
+/* Styling for mat-form-field */
+.filter-form {
+  margin-bottom: 20px;
+  direction: ltr;
+}
+
+/* Ensure mat-form-field components are styled consistently */
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 0; /* Remove margin below form fields to align with button */
+}
+
+.mat-form-field .mat-select,
+.mat-form-field .mat-input-element {
+  width: 100%;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  padding: 0;
+}
+
+.mat-form-field .mat-form-field-label {
+  color: #203647; /* Label color */
+}
+.label{
+  color: #203647;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mat-form-field .mat-datepicker-toggle .mat-icon-button {
+  color: #203647;
+}
+
+/* Styling for the search button */
+.search-button {
+  font-size: 18px;
+  padding: 10px 20px; 
+  width: 100px;
+  height: 50px;
+  margin-left: 8px; 
+  margin-top: -23px;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #203647;
+}
+
+/* Flexbox alignment for the column with date and button */
+.d-flex {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.flex-grow-1 {
+  flex-grow: 1; /* Make form field grow to take available space */
+}
+
+.ml-2 {
+  margin-left: 8px; /* Add spacing between input and button */
+}
+/* styles.css */
+
+.diagram-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.diagram-container mat-icon {
+  font-size: 24px;
+  color: #ee0659;
+}
+
+.diagram-container span {
+  font-size: 16px;
+  color: #333;
+}
+
+.diagram-container button {
+  background-color: #ee0659;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.diagram-container button:hover {
+  background-color: #d0044b;
+}
+
+.ml-2 {
+  margin-left: 8px;
+}
+.row {
+  margin: 0 -15px; /* يزيل الهوامش الخارجية للصف */
+}
+
+.col-4 {
+  padding: 0 15px; /* يضيف هوامش داخلية للأعمدة */
+}

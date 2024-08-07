@@ -1,0 +1,158 @@
+/* company-list.component.css */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: ltr;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #203647;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  tbody tr {
+    border-bottom: 2px solid #ddd;
+  }
+  
+  tbody tr:last-child {
+    border-bottom: 0;
+  }
+  
+  td {
+    font-size: 16px;
+  }
+  
+  td:nth-child(4),
+  td:nth-child(5) {
+    text-align: center;
+  }
+  
+  .percentage {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .accepted {
+    color: #2ecc71;
+  }
+  
+  .refused {
+    color: #e74c3c;
+  }
+  
+  /* Styling for mat-form-field */
+ /* Styling for mat-form-field */
+.filter-form {
+    margin-bottom: 20px;
+    direction: ltr;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 0; /* Remove margin below form fields to align with button */
+  }
+  
+  .mat-form-field .mat-select,
+  .mat-form-field .mat-input-element {
+    width: 100%;
+  }
+  
+  .mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    padding: 0;
+  }
+  
+  .mat-form-field .mat-form-field-label {
+    color: #203647; /* Label color */
+  }
+  
+  .label {
+    color: #203647;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Styling for the search button */
+  .search-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #203647;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #162e40; /* Darker color on hover */
+  }
+  
+  /* Flexbox alignment for the column with date and button */
+  .d-flex {
+    display: flex;
+    align-items: center; /* Center items vertically */
+  }
+  
+  .flex-grow-1 {
+    flex-grow: 1; /* Make form field grow to take available space */
+  }
+  
+  .ml-2 {
+    margin-left: 8px; /* Add spacing between input and button */
+  }
+  
+  /* Optional styling to ensure spacing and alignment */
+  .d-flex .mat-form-field {
+    margin-right: 8px; /* Add spacing between form field and button */
+  }
+  
+  .diagram-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .diagram-container mat-icon {
+    font-size: 24px;
+    color: #ee0659;
+  }
+  
+  .diagram-container span {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .diagram-container button {
+    background-color: #ee0659;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .diagram-container button:hover {
+    background-color: #d0044b;
+  }
+  
+  .ml-2 {
+    margin-left: 8px;
+  }
+  .text{
+    text-align: center;
+    margin: auto;
+  }
+  

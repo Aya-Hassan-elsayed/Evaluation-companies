@@ -1,0 +1,67 @@
+<form class="filter-form mt-6">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label class="label">اسم الشركة</mat-label>
+        <mat-select (selectionChange)="applyRequestTypeFilter($event.value)" style="width: 100%; color: #ee0659;">
+          <mat-option *ngFor="let type of requestTypes" [value]="type.value">{{ type.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-md-4">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label class="label">اختر الشركات لإخفاءها:</mat-label>
+        <mat-select id="companyFilter" name="companyFilter" [(ngModel)]="selectedCompanyNames" (selectionChange)="onSelectionChange()" multiple style="width: 100%; color: #ee0659;">
+          <mat-option *ngFor="let company of allCompanies" [value]="company.companyName" class="option">
+            {{ company.companyName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="diagram-container d-flex align-items-center">
+        <mat-icon>bar_chart</mat-icon>
+        <span class="ml-2">Show Diagram</span>
+        <button mat-button (click)="openTotalAcceptedDialog()" class="ml-2">
+          عدد الطلبات المقبولة
+        </button>
+      </div>
+    </div>
+
+  <div class="col-2"></div>
+  <div class="col-md-4">
+    <div class="diagram-container d-flex align-items-center">
+      <mat-icon>bar_chart</mat-icon>
+      <span class="ml-2">Show Diagram</span>
+      <button mat-button (click)="openAcceptedPercentageDialog()" class="ml-2">
+        نسبة المقبول
+      </button>
+    </div>
+  </div>
+</div>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>العدد</th>
+      <th>اسم الشركة</th>
+      <th>اجمالي عدد الطلبات</th>
+      <th>اجمالي عدد الطلبات المقبولة</th>
+      <th>نسبة المقبول</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of filteredCompanies; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.companyName }}</td>
+      <td>{{ item.totalNumber }}</td>
+      <td>{{ item.totalAcceptedNumber }}</td>
+      <td class="percentage accepted">{{ item.acceptedPercentage }}%</td>
+    </tr>
+  </tbody>
+</table>
