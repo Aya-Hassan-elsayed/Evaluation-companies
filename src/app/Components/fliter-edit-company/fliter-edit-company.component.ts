@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { TaqimService } from '../Services/taqim.service';
+import { TaqimService } from '../../Services/taqim.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { Chart, registerables } from 'chart.js';
-import { company } from '../Interfaces/taqim';
-import { ChartDialogFliterCompanyComponent } from '../Components/chart-dialog-fliter-company/chart-dialog-fliter-company.component';
+import { ChartDialogFliterCompanyComponent } from '../chart-dialog-fliter-company/chart-dialog-fliter-company.component';
+import { company } from '../../Interfaces/taqim';
+
 
 @Component({
-  selector: 'app-fliter-edit-compay',
-  templateUrl: './fliter-edit-compay.component.html',
-  styleUrl: './fliter-edit-compay.component.css'
+  selector: 'app-fliter-edit-company',
+  templateUrl: './fliter-edit-company.component.html',
+  styleUrl: './fliter-edit-company.component.css'
 })
-export class FliterEditCompayComponent implements OnInit {
+export class FliterEditCompanyComponent  implements OnInit{
+
+
   selectedCompany: string | null = null;
   month:string | null = null;
 
@@ -145,3 +148,5 @@ this.dialog.open(ChartDialogFliterCompanyComponent, {
 }
 
 }
+
+

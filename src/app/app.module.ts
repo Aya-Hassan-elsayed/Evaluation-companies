@@ -34,7 +34,7 @@ import { ChartDialogNOTuploadComponent } from './Components/chart-dialog-notuplo
 import { FliterCompaniesComponent } from './Components/fliter-companies/fliter-companies.component';
 import { ChartDialogFliterCompanyComponent } from './Components/chart-dialog-fliter-company/chart-dialog-fliter-company.component';
 import { ToastrModule } from 'ngx-toastr';
-import { FliterEditCompayComponent } from './fliter-edit-compay/fliter-edit-compay.component';
+import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fliter-edit-company.component';
 
 
 
@@ -55,7 +55,7 @@ import { FliterEditCompayComponent } from './fliter-edit-compay/fliter-edit-comp
     ChartDialogNOTuploadComponent,
     FliterCompaniesComponent,
     ChartDialogFliterCompanyComponent,
-    FliterEditCompayComponent
+    FliterEditCompanyComponent
    
   ],
   imports: [

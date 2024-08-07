@@ -8,7 +8,7 @@ import { NOTelrafeComponent } from './Components/notelrafe/notelrafe.component';
 import { GETAllWithFliterComponent } from './Components/getall-with-fliter/getall-with-fliter.component';
 import { GETAllFilterEditComponent } from './Components/getall-filter-edit/getall-filter-edit.component';
 import { FliterCompaniesComponent } from './Components/fliter-companies/fliter-companies.component';
-import { FliterEditCompayComponent } from './fliter-edit-compay/fliter-edit-compay.component';
+import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fliter-edit-company.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
@@ -23,7 +23,7 @@ const routes: Routes = [
       {path:'AllFilter',component:GETAllWithFliterComponent},
       {path:'AllFilterEdit',component:GETAllFilterEditComponent},
       {path:'FliterCompany',component:FliterCompaniesComponent},
-      {path:'FliterEditCompany',component:FliterEditCompayComponent}
+      {path:'FliterEditCompany',component:FliterEditCompanyComponent}
 
     ]
   }
