@@ -5,6 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Chart, registerables } from 'chart.js';
 import { ChartDialogFliterCompanyComponent } from '../chart-dialog-fliter-company/chart-dialog-fliter-company.component';
 import { company } from '../../Interfaces/taqim';
+import * as XLSX from 'xlsx';
+import { AuthService } from '../../Services/auth.service';
+
+
 
 
 @Component({
@@ -66,14 +70,25 @@ export class FliterEditCompanyComponent  implements OnInit{
     { label: 'الكريم للمقاولات', value: 99 }
   ];
 
-  constructor(private taqim :TaqimService , private spinner:NgxSpinnerService, public dialog:MatDialog){
+  constructor(private taqim :TaqimService , private spinner:NgxSpinnerService, public dialog:MatDialog, private _AuthService:AuthService){
     Chart.register(...registerables);
 
   }
 
   ngOnInit(): void {
-    
+    this._AuthService.companyId.subscribe(()=>{
+
+      this.filterBasedonCompanyId(this._AuthService.companyId.getValue())
+
+    })
   }
+
+  filterBasedonCompanyId(userCompanyId: number) {
+    if (userCompanyId) {
+      this.requestTypes = this.requestTypes.filter(item => item.value === userCompanyId);
+    }
+  }
+
   getFliterCompaines(requestType:string,startYear:string,endYear:string){
 
   this.spinner.show()
@@ -145,6 +160,25 @@ this.dialog.open(ChartDialogFliterCompanyComponent, {
   width: '80%',
   data: { companies: this.companies, chartType: 'combined' }
 });
+}
+
+exportToExcel(): void {
+  // تحويل بيانات الشركات إلى كائنات تحتوي على العناوين باللغة العربية
+  const dataToExport = this.companies.map((item, index) => ({
+    'العدد': index + 1,
+    'اسم الشركة': item.compName,
+    'التاريخ': this.formatDate(item.assigDateMonth, item.assigDateYear),  
+      'اجمالي عدد الطلبات': item.totalorders,
+    'اجمالي عدد الطلبات المقبولة': item.acceptedOrders,
+    'نسبة المقبول': item.precentage + '%'
+  }));
+
+  // تحويل الكائنات إلى ورقة Excel
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+  const workbook: XLSX.WorkBook = { Sheets: { 'Data': worksheet }, SheetNames: ['Data'] };
+
+  // حفظ الملف باسم معين
+  XLSX.writeFile(workbook, '  فلتر  النعديلات الخاص بالشركة  .xlsx');
 }
 
 }

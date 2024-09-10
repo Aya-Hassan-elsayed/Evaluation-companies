@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { Chart, registerables } from 'chart.js';
 import { ChartDialogEDitComponent } from '../chart-dialog-edit/chart-dialog-edit.component';
+import * as XLSX from 'xlsx';
+import { AuthService } from '../../Services/auth.service';
 
 
 @Component({
@@ -59,18 +61,35 @@ export class GetEditComponent implements OnInit {
     { label: 'الطلبات المستردة', value: 89 },
     { label: 'الكريم للمقاولات', value: 99 }
   ];
-  constructor(private EditService: TaqimService, private spinner: NgxSpinnerService,public dialog:MatDialog) {
+  constructor(private EditService: TaqimService, private spinner: NgxSpinnerService,public dialog:MatDialog, private _AuthService:AuthService) {
     Chart.register(...registerables);
 
   }
 
   ngOnInit(): void {
-    this.getEditCompanies();
+    this._AuthService.companyId.subscribe({
+      next: (companyId) => {
+        if (companyId) {
+        this.filterBasedonCompanyId(companyId);
+        } else {
+    this.getEditCompanies('');
   }
+}
+});
+}
 
-  getEditCompanies() {
+filterBasedonCompanyId(userCompanyId: number) {
+  if (userCompanyId) {
+    this.requestTypes = this.requestTypes.filter(item => item.value === userCompanyId);
+  }
+}
+
+
+  getEditCompanies(requestType: string):void{
     this.spinner.show();
-    this.EditService.GetEdit().subscribe(res => {
+    this.EditService.GetEdit(requestType).subscribe(res => {
+      this.companies=res.sort((a, b) => b.acceptedPercentage - a.acceptedPercentage)
+
       this.companies = res;
       this.allCompanies = res; // Save the original data for the select options
       this.spinner.hide();
@@ -87,7 +106,7 @@ export class GetEditComponent implements OnInit {
 
 
   applyFilters(): void {
-    this.getEditCompanies();
+    this.getEditCompanies(this.requestTypeFilter);
   }
 
   onSelectionChange(): void {
@@ -111,6 +130,23 @@ export class GetEditComponent implements OnInit {
       width: '80%',
       data: { companies: this.companies, chartType: 'totalAcceptedNumber' }
     });
+  }
+  exportToExcel(): void {
+    // تحويل بيانات الشركات إلى كائنات تحتوي على العناوين باللغة العربية
+    const dataToExport = this.companies.map((item, index) => ({
+      'العدد': index + 1,
+      'اسم الشركة': item.companyName,
+      'اجمالي عدد الطلبات': item.totalNumber,
+      'اجمالي عدد الطلبات المقبولة': item.totalAcceptedNumber,
+      'نسبة المقبول': item.acceptedPercentage + '%'
+    }));
+
+    // تحويل الكائنات إلى ورقة Excel
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Data': worksheet }, SheetNames: ['Data'] };
+
+    // حفظ الملف باسم معين
+    XLSX.writeFile(workbook, 'تعديلات _الشركات.xlsx');
   }
 
 }

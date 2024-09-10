@@ -36,7 +36,7 @@
           </div>
         </div>
     
-      <div class="col-2"></div>
+     
       <div class="col-md-4">
         <div class="diagram-container d-flex align-items-center">
           <mat-icon>bar_chart</mat-icon>
@@ -46,8 +46,16 @@
           </button>
         </div>
       </div>
-    </div>
-  
+      <div class="col-md-4">
+        <div class="diagram-container d-flex align-items-center">
+          <mat-icon>bar_chart</mat-icon>
+          <span class="ml-2">Excelsheet</span>
+          <button mat-button (click)="exportToExcel()" class="ml-2">
+            تحميل شيت الاكسيل  
+          </button>
+        </div>
+        </div>
+    </div>  
     <div *ngIf=" !addedDateFilter || !addedSecondDate" class="alert alert-warning mt-3 d-flex align-items-center">
       <mat-icon>warning</mat-icon>
       <span class="text"> يرجى اختيار  تاريخ البداية والنهاية لكي يتم اظهار التقييم للشركات </span>
@@ -59,6 +67,7 @@
     </div>
     
   </form>
+
     <table>
         <thead>
           <tr>

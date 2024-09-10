@@ -5,6 +5,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Chart, registerables } from 'chart.js';
 import { MatDialog } from '@angular/material/dialog';
 import { ChartDialogEDitComponent } from '../chart-dialog-edit/chart-dialog-edit.component';
+import * as XLSX from 'xlsx';
+import { AuthService } from '../../Services/auth.service';
+
 
 
 @Component({
@@ -65,12 +68,24 @@ export class GETAllFilterEditComponent  implements OnInit{
   ];
 
 
-  ngOnInit(): void {
-    
-  }
-  constructor(private taqim:TaqimService,private spinner:NgxSpinnerService , public dialog:MatDialog){
+
+  constructor(private taqim:TaqimService,private spinner:NgxSpinnerService , public dialog:MatDialog , private _AuthService:AuthService){
     Chart.register(...registerables);
 
+  }
+
+  ngOnInit(): void {
+    this._AuthService.companyId.subscribe(()=>{
+
+      this.filterBasedonCompanyId(this._AuthService.companyId.getValue())
+
+    })
+  }
+
+  filterBasedonCompanyId(userCompanyId: number) {
+    if (userCompanyId) {
+      this.requestTypes = this.requestTypes.filter(item => item.value === userCompanyId);
+    }
   }
   getFliterCompanies(requestType: string, addedDate: string, addedSecondDate: string) {
     this.spinner.show();
@@ -124,6 +139,20 @@ export class GETAllFilterEditComponent  implements OnInit{
       width: '80%',
       data: { companies: this.companies, chartType: 'totalAcceptedNumber' }
     });
+  }
+  exportToExcel(): void {
+    const dataToExport = this.companies.map((item, index) => ({
+      'العدد': index + 1,
+      'اسم الشركة': item.companyName,
+      'اجمالي عدد الطلبات': item.totalNumber,
+      'اجمالي عدد الطلبات المقبولة': item.totalAcceptedNumber,
+      'نسبة المقبول': item.acceptedPercentage + '%'
+    }));
+
+    // تحويل الكائنات إلى ورقة Excel
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Data': worksheet }, SheetNames: ['Data'] };
+    XLSX.writeFile(workbook, 'فلتر التعديلات  الخاص بالشركات .xlsx');
   }
 }
 

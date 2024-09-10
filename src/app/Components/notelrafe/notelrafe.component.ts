@@ -6,6 +6,9 @@ import { error } from 'console';
 import { ChartDialogNOTuploadComponent } from '../chart-dialog-notupload/chart-dialog-notupload.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Chart, registerables } from 'chart.js';
+import * as XLSX from 'xlsx';
+import { AuthService } from '../../Services/auth.service';
+
 
 
 @Component({
@@ -59,19 +62,35 @@ export class NOTelrafeComponent implements OnInit {
     { label: 'الكريم للمقاولات', value: 99 }
   ];
   
- constructor(private NotuploadServices:TaqimService,private spinner:NgxSpinnerService , private dialog:MatDialog){
+ constructor(private NotuploadServices:TaqimService,private spinner:NgxSpinnerService , private dialog:MatDialog, private _AuthService:AuthService ){
   Chart.register(...registerables);
 
  }
 
   ngOnInit(): void {
+    this._AuthService.companyId.subscribe({
+      next: (companyId) => {
+        if (companyId) {
+          this.filterBasedonCompanyId(companyId);
+        } else {
     this.getNotUPloadedCompanies('')
     
+  }
+}
+});
+}
+
+
+  filterBasedonCompanyId(userCompanyId: number) {
+    if (userCompanyId) {
+      this.requestTypes = this.requestTypes.filter(item => item.value === userCompanyId);
+    }
   }
   getNotUPloadedCompanies(requestType: string){
     this.spinner.show()
     this.NotuploadServices.getNotUploade(requestType).subscribe(res=>{
       console.log(res)
+      this.companies=res.sort((a, b) => a.acceptedPercentage - b.acceptedPercentage)
       this.companies=res
       this.allCompanies = res; // Save the original data for the select options
 
@@ -109,6 +128,24 @@ export class NOTelrafeComponent implements OnInit {
       data: { companies: this.companies, chartType: 'totalAcceptedNumber' }
     });
   }
+  exportToExcel(): void {
+    // تحويل بيانات الشركات إلى كائنات تحتوي على العناوين باللغة العربية
+    const dataToExport = this.companies.map((item, index) => ({
+      'العدد': index + 1,
+      'اسم الشركة': item.companyName,
+      'اجمالي عدد الطلبات': item.totalNumber,
+      'اجمالي عدد الطلبات التي لم يتم رفعها ': item.totalAcceptedNumber,
+      'نسبة لم يتم الرفع ': item.acceptedPercentage + '%'
+    }));
+
+    // تحويل الكائنات إلى ورقة Excel
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Data': worksheet }, SheetNames: ['Data'] };
+
+    // حفظ الملف باسم معين
+    XLSX.writeFile(workbook, 'طلبات التي لم يتم رفعها بالنسبة  _للشركات.xlsx');
+  }
+
 
   
 }

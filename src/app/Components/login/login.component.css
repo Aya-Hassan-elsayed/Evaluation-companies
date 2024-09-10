@@ -1,0 +1,274 @@
+/* Basic Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', Helvetica, sans-serif;
+    background-color: rgb(29, 29, 29);
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main {
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.logo-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 150px;
+}
+
+.card {
+    padding: 20px;
+}
+
+.card-header h2 {
+    text-align: center;
+    color: #f0ad4e;
+    font-size: 24px;
+}
+
+.card-body {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(49, 49, 49);
+}
+
+.required {
+    color: brown;
+}
+
+.input-field, .input-group {
+    position: relative;
+}
+
+.input-field input, .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5; /* Lighter background for better readability */
+    color: #333; /* Darker text color for contrast */
+}
+
+.input-field .error input, .input-group .error input {
+    border-color: red;
+}
+
+.password-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #271717;
+}
+
+.text-danger {
+    color: red;
+}
+
+.forgot-password-link {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.forgot-password-link a {
+    color: #f0ad4e;
+    text-decoration: none;
+}
+
+.forgot-password-link a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #f0ad4e;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e49c36;
+}
+
+.parent {
+    background-color: rgb(29, 29, 29);
+}
+
+h1 {
+    color: #f0ad4e;
+}
+
+article, aside, details, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    word-wrap: break-word;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+img {
+    border: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.bg-illustration {
+    position: relative;
+    height: 100vh;
+    width: 1194px;
+    background: url("../../../assets/Background/beautiful-landscape.jpg") no-repeat center center;
+    background-size: cover;
+    filter: grayscale(50%);
+    float: left;
+    animation: bgslide 2.3s forwards;
+}
+
+.bg-illustration img {
+    width: 248px;
+    user-select: none;
+    height: auto;
+    margin: 19px 0 0 25px;
+}
+
+@keyframes bgslide {
+    from {
+        left: -100%;
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        width: 1194px;
+        opacity: 1;
+    }
+}
+
+.login {
+    max-height: 100vh;
+    overflow-y: auto;
+    float: left;
+    margin: 0 auto;
+    width: calc(100% - 1194px);
+    color: #fff;
+}
+
+.login .container {
+    width: 505px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.login .container h1 {
+    margin-top: 100px;
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+.login .container .login-form {
+    margin-top: 112px;
+}
+
+.login .container .login-form form {
+    display: grid;
+}
+
+.login .container .login-form form input {
+    font-size: 20px;
+    font-weight: normal;
+    background: #f0dbbf;
+    margin: 12.5px 0;
+    height: 68px;
+    border: none;
+    padding: 0 30px;
+    border-radius: 10px;
+}
+
+.login .container .login-form form button[type=submit] {
+    background-color: #f0ad4e;
+    border: none;
+    margin-top: 124px;
+    margin-bottom: 20px;
+    width: 241px;
+    height: 58px;
+    text-transform: uppercase;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.login .container .login-form form button[type=submit]::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 10px;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transition: 0.3s ease-in-out;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(118, 101, 2);
+}
+
+.login .container .login-form form button[type=submit]:hover::after {
+    opacity: 1;
+}
+
+.login .container .remember-form {
+    position: relative;
+    margin-top: -30px;
+}
+
+.login .container .remember-form input[type=checkbox] {
+    margin-top: 9px;
+}
+
+.login .container .remember-form label {
+    font-size: 15px;
+    color: #fff;
+}
+
+.login .container .error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+}

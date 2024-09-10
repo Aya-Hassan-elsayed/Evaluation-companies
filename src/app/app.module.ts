@@ -35,6 +35,12 @@ import { FliterCompaniesComponent } from './Components/fliter-companies/fliter-c
 import { ChartDialogFliterCompanyComponent } from './Components/chart-dialog-fliter-company/chart-dialog-fliter-company.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fliter-edit-company.component';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { WelcomeDialogComponent } from './Components/welcome-dialog/welcome-dialog.component';
+import { WelcomeDialogRegisterComponent } from './Components/welcome-dialog-register/welcome-dialog-register.component';
 
 
 
@@ -55,7 +61,12 @@ import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fli
     ChartDialogNOTuploadComponent,
     FliterCompaniesComponent,
     ChartDialogFliterCompanyComponent,
-    FliterEditCompanyComponent
+    FliterEditCompanyComponent,
+    LoginComponent,
+    RegisterComponent,
+    NavbarComponent,
+    WelcomeDialogComponent,
+    WelcomeDialogRegisterComponent
    
   ],
   imports: [
@@ -81,6 +92,8 @@ import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fli
     HttpClientModule,
     MatDialogModule,
     ToastrModule.forRoot(),
+    FontAwesomeModule,
+    MatDialogModule
     
 
    

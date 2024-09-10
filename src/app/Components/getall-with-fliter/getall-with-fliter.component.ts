@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Chart, registerables } from 'chart.js';
 import { ChartDialogComponent } from '../chart-dialog/chart-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import * as XLSX from 'xlsx';
+import { AuthService } from '../../Services/auth.service';
+
 
 
 @Component({
@@ -66,12 +69,24 @@ export class GETAllWithFliterComponent implements OnInit {
     { label: 'الكريم للمقاولات', value: 99 }
   ];
 
-  constructor(private taqim: TaqimService, private spinner: NgxSpinnerService,public dialog:MatDialog ,private toaster:ToastrService ) {
+  constructor(private taqim: TaqimService, private spinner: NgxSpinnerService,public dialog:MatDialog  , private _AuthService:AuthService ) {
     Chart.register(...registerables);
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._AuthService.companyId.subscribe(()=>{
+
+      this.filterBasedonCompanyId(this._AuthService.companyId.getValue())
+
+    })
+  }
+
+  filterBasedonCompanyId(userCompanyId: number) {
+    if (userCompanyId) {
+      this.requestTypes = this.requestTypes.filter(item => item.value === userCompanyId);
+    }
+  }
 
   getFliterCompanies(requestType: string, addedDate: string, addedSecondDate: string) {
     this.spinner.show();
@@ -80,19 +95,10 @@ export class GETAllWithFliterComponent implements OnInit {
         this.companies = res;
         this.allCompanies = res;
         this.spinner.hide();
-      },
-      (error: any) => {
-        if (error && error.error) {
-          this.errorMessage = error.error;
-        } else {
-          this.errorMessage = "An error occurred during update.";
-        }
-        this.error = true;
-        this.toaster.error(this.errorMessage, "Error", { disableTimeOut: true, positionClass: 'toast-top-center' });
-      }
-    
-    );
-  }
+      },error=>{
+        console.error('Error fetching data:', error);
+      });
+    }
 
   applyRequestTypeFilter(requestType: string): void {
     this.requestTypeFilter = requestType;
@@ -134,4 +140,21 @@ export class GETAllWithFliterComponent implements OnInit {
     });
   }
   
+  exportToExcel(): void {
+    // تحويل بيانات الشركات إلى كائنات تحتوي على العناوين باللغة العربية
+    const dataToExport = this.companies.map((item, index) => ({
+      'العدد': index + 1,
+      'اسم الشركة': item.companyName,
+      'اجمالي عدد الطلبات': item.totalNumber,
+      'اجمالي عدد الطلبات المقبولة': item.totalAcceptedNumber,
+      'نسبة المقبول': item.acceptedPercentage + '%'
+    }));
+
+    // تحويل الكائنات إلى ورقة Excel
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Data': worksheet }, SheetNames: ['Data'] };
+
+    // حفظ الملف باسم معين
+    XLSX.writeFile(workbook, 'بيانات_الشركات.xlsx');
+  }
 }

@@ -49,6 +49,13 @@
               <span>فلتر  التعديلات  الخاص بالشركة   </span>
             </a>
           </li>
+          <li [ngClass]="{'active': isActive('/DashBoard/')}">
+            <a (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
+              <span>تسجيل الخروج</span>
+            </a>
+          </li>
+          
         </ul>
       </nav>
       <button [ngClass]="{'close-button': !isSideBarEnable}" (click)="toggleSideBar()" class="toggle-sideBar">

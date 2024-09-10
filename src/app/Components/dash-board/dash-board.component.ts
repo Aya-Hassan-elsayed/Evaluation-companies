@@ -1,6 +1,7 @@
 // dash-board.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class DashBoardComponent implements OnInit {
 
   isSideBarEnable: boolean = true;
   activeSubMenu: string | null = null;
-  constructor(private router: Router) {
+  constructor(private router: Router ,private authService:AuthService ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activeLink = event.urlAfterRedirects;
@@ -25,6 +26,7 @@ export class DashBoardComponent implements OnInit {
     return this.activeLink === link;
   }
 
+  
 
   ngOnInit(): void {}
   
@@ -40,4 +42,9 @@ export class DashBoardComponent implements OnInit {
       this.activeSubMenu = subMenu;
     }
   }
+  logout(): void {
+    this.authService.logOut(); // Call the logout method from AuthService
+    this.router.navigate(['/Home']); // Redirect to home page after logging out
+  }
+
 }

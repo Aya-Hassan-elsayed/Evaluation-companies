@@ -9,13 +9,18 @@ import { GETAllWithFliterComponent } from './Components/getall-with-fliter/getal
 import { GETAllFilterEditComponent } from './Components/getall-filter-edit/getall-filter-edit.component';
 import { FliterCompaniesComponent } from './Components/fliter-companies/fliter-companies.component';
 import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fliter-edit-company.component';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
   { path: 'Home', component: HomeComponent },
+  {path:'login',component:LoginComponent},
+  {path:'register', component:RegisterComponent},
   { 
     path: 'DashBoard', 
-    component: DashBoardComponent, 
+    component: DashBoardComponent,  canActivate: [AuthGuard],
     children: [
       { path: 'Evaluate', component:EvaluateComponent },
       { path: 'Edit', component: GetEditComponent },
