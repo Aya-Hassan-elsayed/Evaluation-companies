@@ -14,7 +14,7 @@ import { Login, Register } from '../Interfaces/register';
 })
 export class AuthService {
   userToken:string = ""
-  private apiUrl = 'http://10.100.102.50:44366/api/Auth/Login'
+  private apiUrl = 'http://10.100.102.50:44363/api/Auth/Login'
   companyId : BehaviorSubject<number> = new BehaviorSubject(-1);
   role : BehaviorSubject<string> = new BehaviorSubject("")
 
@@ -29,11 +29,11 @@ export class AuthService {
   }
   getRegister (data:Register) : Observable<any>
   {
-    return this._HttpClient.post("http://10.100.102.50:44366/api/Auth/register",data)
+    return this._HttpClient.post("http://10.100.102.50:44363/api/Auth/register",data)
   }
   sendlogin (data:Login) : Observable<any>
   {
-    return this._HttpClient.post("http://10.100.102.50:44366/api/Auth/Login",data)
+    return this._HttpClient.post("http://10.100.102.50:44363/api/Auth/Login",data)
   }
   sendToken()
   {

@@ -83,15 +83,21 @@ export class RegisterComponent {
         },
         error: (err: HttpErrorResponse) => {
           console.error(err);
-          const errorMessage = err.error?.message ;
-          this.toastr.error(errorMessage, 'Error', { disableTimeOut: true });
+  
+          // Extract error messages from the response
+          if (err.error?.errors?.length > 0) {
+            const errorMessage = err.error.errors.join('<br>'); // Join messages with line breaks
+            this.toastr.error(errorMessage, 'Error', { disableTimeOut: true, enableHtml: true , positionClass: 'toast-top-center'  }); // Use enableHtml to display messages with formatting
+          } else {
+            this.toastr.error('حدث خطأ أثناء التسجيل.', 'Error', { disableTimeOut: true });
+          }
         }
       });
     } else {
       this.register.markAllAsTouched();
     }
   }
-
+  
   showWelcomeMessage() {
     const dialogRef = this.dialog.open(WelcomeDialogRegisterComponent, {
       disableClose: true,

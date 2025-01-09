@@ -6,6 +6,11 @@ export interface company{
     acceptedPercentage:number;
     refusedPercentage:number;
     date: string;
+    report:string,
+    reportEdit:string,
+    reportLmetmelraf:string,
+    user:string,
+
     // interface Fliter with company 
     compName:string;
     assigDateMonth:number;

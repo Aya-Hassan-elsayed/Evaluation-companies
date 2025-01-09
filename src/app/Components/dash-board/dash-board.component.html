@@ -49,6 +49,22 @@
               <span>فلتر  التعديلات  الخاص بالشركة   </span>
             </a>
           </li>
+
+          <li *ngIf="isAdmin" [ngClass]="{'active': isActive('/DashBoard/ReportsCompany')}">
+            <a [routerLink]="['/DashBoard/ReportsCompany']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <i class="fas fa-filter"></i> <!-- Icon example -->
+              <span> انشاء تقرير للشركات </span>
+            </a>
+          </li>
+          <li [ngClass]="{'active': isActive('/DashBoard/ViewReports')}">
+            <a [routerLink]="['/DashBoard/ViewReports']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <i class="fas fa-filter"></i> <!-- Icon example -->
+              <span> رؤية   التقرارير  </span>
+            </a>
+          </li>
+          
+          
+          
           <li [ngClass]="{'active': isActive('/DashBoard/')}">
             <a (click)="logout()">
               <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->

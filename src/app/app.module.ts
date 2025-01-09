@@ -41,6 +41,10 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WelcomeDialogComponent } from './Components/welcome-dialog/welcome-dialog.component';
 import { WelcomeDialogRegisterComponent } from './Components/welcome-dialog-register/welcome-dialog-register.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { ViewReportComponent } from './Components/view-report/view-report.component';
+
 
 
 
@@ -66,7 +70,9 @@ import { WelcomeDialogRegisterComponent } from './Components/welcome-dialog-regi
     RegisterComponent,
     NavbarComponent,
     WelcomeDialogComponent,
-    WelcomeDialogRegisterComponent
+    WelcomeDialogRegisterComponent,
+    ReportsComponent,
+    ViewReportComponent
    
   ],
   imports: [
@@ -93,7 +99,9 @@ import { WelcomeDialogRegisterComponent } from './Components/welcome-dialog-regi
     MatDialogModule,
     ToastrModule.forRoot(),
     FontAwesomeModule,
-    MatDialogModule
+    MatStepperModule,
+  
+    MatDialogModule,
     
 
    

@@ -11,6 +11,8 @@ import { AuthService } from '../../Services/auth.service';
 })
 export class DashBoardComponent implements OnInit {
   activeLink: string = '';
+  isAdmin: boolean = false;
+
 
   isSideBarEnable: boolean = true;
   activeSubMenu: string | null = null;
@@ -28,7 +30,20 @@ export class DashBoardComponent implements OnInit {
 
   
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const roles = localStorage.getItem("userRoles");
+    console.log("Roles from localStorage during initialization:", roles); // التحقق هنا
+  
+    if (roles) {
+      const parsedRoles = JSON.parse(roles); // تحويل النص إلى مصفوفة
+      console.log("Parsed roles:", parsedRoles); // التأكد من الأدوار المحللة
+      this.isAdmin = parsedRoles.includes('admin'); // التحقق من وجود 'admin'
+      console.log("Is Admin:", this.isAdmin); // طباعة ما إذا كان المستخدم أدمن
+    } else {
+      console.log("No roles found in localStorage");
+    }
+  }
+  
   
 
   toggleSideBar(): void {

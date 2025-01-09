@@ -1,0 +1,119 @@
+<div class="container">
+  <h2>Insert Company Report</h2>
+
+  <form>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+
+      <!-- Step 1: Company Report -->
+      <mat-step [stepControl]="companyForm.controls.companyid">
+        <ng-template matStepLabel>Company Report</ng-template>
+
+        <div class="form-group">
+          <h3>  انشاء تقرير الخاصة بالطلبات الجديده للشركة </h3>
+          <label for="companyid">Company Name</label>
+          <select
+            id="companyid"
+            name="companyid"
+            class="form-control"
+            [(ngModel)]="companyid"
+            (ngModelChange)="onCompanyChange($event)"
+            required
+          >
+            <option *ngFor="let company of filteredRequestTypes" [value]="company.value">
+              {{ company.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="report">Report</label>
+          <textarea
+            id="report"
+            name="report"
+            class="form-control"
+            [(ngModel)]="report"
+            required
+          ></textarea>
+        </div>
+
+        <button mat-button type="button" matStepperNext>Next</button>
+        <button mat-button type="submit" (click)="onSubmit()">Submit</button>
+
+      </mat-step>
+
+      <!-- Step 2: Edit Report -->
+      <mat-step [stepControl]="companyForm.controls.reportEdit">
+        <ng-template matStepLabel>Edit Report</ng-template>
+
+        <div class="form-group">
+          <h3>  انشاء تقرير الخاصة بالتعديلات    </h3>
+
+          <label for="companyid">Company Name</label>
+          <select
+            id="companyid"
+            name="companyid"
+            class="form-control"
+            [(ngModel)]="companyid"
+            (ngModelChange)="onCompanyChange($event)"
+            required
+          >
+            <option *ngFor="let company of filteredRequestTypes" [value]="company.value">
+              {{ company.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="report">Report</label>
+          <textarea
+            id="reportEdit"
+            name="reportEdit"
+            class="form-control"
+            [(ngModel)]="reportEdit"
+            required
+          ></textarea>
+        </div>
+
+        <button mat-button type="button" matStepperNext>Next</button>
+        <button mat-button type="submit" (click)="submitEdit()">Submit</button>
+      </mat-step>
+
+       <!-- Step 2: Edit Report -->
+       <mat-step [stepControl]="companyForm.controls.reportlmetmelraf">
+        <ng-template matStepLabel> lmetmelraf Report</ng-template>
+
+        <div class="form-group">
+          <h3>  انشاء تقرير الخاصة بالطلبات التي لم يتم رفعها مساحيا     </h3>
+
+          <label for="companyid">Company Name</label>
+          <select
+            id="companyid"
+            name="companyid"
+            class="form-control"
+            [(ngModel)]="companyid"
+            (ngModelChange)="onCompanyChange($event)"
+            required
+          >
+            <option *ngFor="let company of filteredRequestTypes" [value]="company.value">
+              {{ company.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="report">Report</label>
+          <textarea
+            id="reportlmetmelraf"
+            name="reportlmetmelraf"
+            class="form-control"
+            [(ngModel)]="reportlmetmelraf"
+            required
+          ></textarea>
+        </div>
+
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button type="submit" (click)="submitlmetmelraf()">Submit</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</div>

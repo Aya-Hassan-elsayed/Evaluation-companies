@@ -1,0 +1,53 @@
+<form class="filter-form mt-6">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label class="label">اسم الشركة</mat-label>
+          <mat-select (selectionChange)="applyRequestTypeFilter($event.value)" style="width: 100%; color: #ee0659;">
+            <mat-option *ngFor="let type of requestTypes" [value]="type.value">{{ type.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <div class="diagram-container d-flex align-items-center">
+          <mat-icon>bar_chart</mat-icon>
+          <span class="ml-2">Excelsheet</span>
+          <button mat-button (click)="exportToExcel()" class="ml-2">
+            تحميل شيت الاكسيل  
+          </button>
+        </div>
+        </div>
+    </div>  
+  
+    
+  </form>
+
+    <table>
+        <thead>
+          <tr>
+            <th>العدد</th>
+            <th>اسم الشركة</th>
+            <th>  طلبات الشركات الجديدة </th>
+            <th> التعديلات   </th>
+            <th> الطلبات التي لم يتم رفعها </th>
+            <th>التاريخ </th>
+            <th>Created by  </th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of companies; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.companyName }}</td>
+            <td>{{ item.report}}</td>
+            <td>{{ item.reportEdit }}</td>
+            <td>{{ item.reportLmetmelraf }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.user }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+

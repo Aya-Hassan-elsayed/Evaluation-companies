@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObservableInput } from 'rxjs';
 import { company } from '../Interfaces/taqim';
 import { AuthService } from './auth.service';
 
@@ -8,8 +8,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class TaqimService {
-  private apiUrl = 'http://10.100.102.50:44366/api/Taqim'; 
-  private baseurl = 'http://10.100.102.50:44366/api/FilTersCompanies';
+  private apiUrl = 'http://10.100.102.50:44363/api/Taqim'; 
+  private baseurl = 'http://10.100.102.50:44363/api/FilTersCompanies';
+  private url='http://10.100.102.50:44363/api/CompanyReport';
 
   constructor(private http: HttpClient, private _AuthService: AuthService) {}
 
@@ -61,4 +62,40 @@ export class TaqimService {
     const url = `${this.apiUrl}?companyid=${companyId}&startdate=${startDate}&enddate=${endDate}`;
     return this.http.get(url, { headers });
   }
+
+
+  InsertReport(Companyid: number, report: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const URL = `${this.url}?Companyid=${Companyid}&report=${report}`;
+    
+    console.log('Sending PUT request with headers:', headers);
+    console.log('Sending to URL:', URL);
+    
+    return this.http.put(URL, {}, { headers }); // Correct placement of headers
+  }
+  InsertEditReport(Companyid: number,  reportEdit:string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const URL = `${this.url}?Companyid=${Companyid}&reportEdit=${reportEdit}`;
+    
+    console.log('Sending PUT request with headers:', headers);
+    console.log('Sending to URL:', URL);
+    
+    return this.http.put(URL, {}, { headers }); // Correct placement of headers
+  }
+  
+  Insertlmetmelraf3Report(Companyid: number,reportlmetmelraf3:string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const URL = `${this.url}?Companyid=${Companyid}&reportlmetmelraf3=${reportlmetmelraf3}`;
+    
+    console.log('Sending PUT request with headers:', headers);
+    console.log('Sending to URL:', URL);
+    
+    return this.http.put(URL, {}, { headers }); // Correct placement of headers
+  }
+  getReport(companyId: number, ): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const URL = `${this.url}/GetCompanyReport?companyId=${companyId}`;
+    return this.http.get(URL, { headers });
+  }
+  
 }

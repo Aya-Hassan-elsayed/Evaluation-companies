@@ -12,6 +12,8 @@ import { FliterEditCompanyComponent } from './Components/fliter-edit-company/fli
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { ViewReportComponent } from './Components/view-report/view-report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
@@ -28,7 +30,9 @@ const routes: Routes = [
       {path:'AllFilter',component:GETAllWithFliterComponent},
       {path:'AllFilterEdit',component:GETAllFilterEditComponent},
       {path:'FliterCompany',component:FliterCompaniesComponent},
-      {path:'FliterEditCompany',component:FliterEditCompanyComponent}
+      {path:'FliterEditCompany',component:FliterEditCompanyComponent},
+      {path:'ReportsCompany',component:ReportsComponent},
+      {path:'ViewReports', component:ViewReportComponent }
 
     ]
   }

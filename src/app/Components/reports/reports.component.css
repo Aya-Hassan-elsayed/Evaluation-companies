@@ -1,0 +1,149 @@
+/* General container styling */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  height: 70vh;
+  background-color: #203647;
+  padding: 80px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  color: #ddd;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+h3{
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  color: #203647;
+ margin-top: 15px;
+ font-weight: bold;
+
+
+}
+
+/* Form styling */
+form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #203647;
+}
+
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #ee0659;
+  outline: none;
+  box-shadow: 0 0 10px rgba(238, 6, 89, 0.2);
+}
+
+textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+/* Button styling */
+button {
+  display: inline-block;
+  padding: 15px 35px;
+  background-color: #ee0659;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 15px 5px;
+}
+
+button:hover {
+  background-color: #c0044b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Stepper Styling */
+.mat-horizontal-stepper {
+  background-color: transparent;
+  padding: 0;
+}
+
+.mat-step-header {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: #203647;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: #ee0659 !important;
+  color: #ffffff;
+}
+
+.mat-stepper-horizontal {
+  justify-content: center;
+}
+
+.mat-step-content {
+  margin-top: 20px;
+}
+
+.mat-step-header.mat-active {
+  background-color: #ee0659 !important; /* اللون الذي تريده للخطوة النشطة */
+  color: #fff !important; /* لون النص للخطوة النشطة */
+  font-weight: bold !important;
+  border-radius: 10px; /* إضافة تأثير دائري للحواف */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mat-step-header {
+  background-color: #f4f4f4;
+  color: #203647;
+  font-weight: normal;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mat-step-header:hover {
+  background-color: #ddd; 
+}
+/* For the "Previous" button */
+button[matStepperPrevious] ,button[matStepperNext] {
+  background-color:#203647; /* Red background */
+ 
+}
+
+
+

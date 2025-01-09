@@ -32,6 +32,8 @@ export class LoginComponent {
       next: (res) => {
         console.log('Response:', res); // تحقق من محتوى الـ response
         localStorage.setItem("userToken", res.token);
+        localStorage.setItem("userRoles", JSON.stringify(res.roles)); // حفظ الأدوار
+        console.log("Roles saved to localStorage:", localStorage.getItem("userRoles"));
         this._AuthService.companyId.next(res.companyUserID);
         localStorage.setItem('companyId', res.companyUserID);
 
